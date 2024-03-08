@@ -1,1 +1,6 @@
-
+server:
+  port: 8017
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:29092
