@@ -3,6 +3,7 @@ version: '3'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
+    restart: unless-stopped
     networks:
       - broker-kafka
     environment:
@@ -11,6 +12,7 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:latest
+    restart: unless-stopped
     networks:
       - broker-kafka
     depends_on:
@@ -27,6 +29,7 @@ services:
 
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
+    restart: unless-stopped
     networks:
       - broker-kafka
     depends_on:
