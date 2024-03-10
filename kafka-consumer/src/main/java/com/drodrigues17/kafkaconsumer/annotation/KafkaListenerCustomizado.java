@@ -1,4 +1,4 @@
-package com.drodrigues17.kafkaconsumer.custom;
+package com.drodrigues17.kafkaconsumer.annotation;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.kafka.annotation.KafkaListener;
