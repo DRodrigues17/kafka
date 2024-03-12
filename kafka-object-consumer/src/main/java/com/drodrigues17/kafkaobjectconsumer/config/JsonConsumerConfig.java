@@ -1,4 +1,4 @@
-package com.drodrigues17.kafkaconsumer.config;
+package com.drodrigues17.kafkaobjectconsumer.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,20 +10,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
-import org.springframework.kafka.listener.RecordInterceptor;
+import org.springframework.kafka.support.converter.JsonMessageConverter;
 
 import java.util.HashMap;
 
 @Slf4j
 @RequiredArgsConstructor
 @Configuration
-public class StringConsumerConfig {
+public class JsonConsumerConfig {
 
 
   public final KafkaProperties properties;
 
   @Bean
-  public ConsumerFactory<String, String> consumerFactory() {
+  public ConsumerFactory<String, Object> consumerFactory() {
     var configs = new HashMap<String, Object>();
     configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getBootstrapServers());
     configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -32,20 +32,10 @@ public class StringConsumerConfig {
   }
 
   @Bean
-  public ConcurrentKafkaListenerContainerFactory<String, String> kafkaContainerFactory(ConsumerFactory<String, String> consumerFactory) {
-    var factory = new ConcurrentKafkaListenerContainerFactory<String, String>();
+  public ConcurrentKafkaListenerContainerFactory kafkaContainerFactory(ConsumerFactory<String, Object> consumerFactory) {
+    var factory = new ConcurrentKafkaListenerContainerFactory<String, Object>();
     factory.setConsumerFactory(consumerFactory);
-    factory.setRecordInterceptor(filtarMensagem());
+    factory.setRecordMessageConverter(new JsonMessageConverter());
     return factory;
-  }
-
-  private RecordInterceptor<String, String> filtarMensagem() {
-    return (record, consumer) -> {
-     if (record.value().contains("mensagem")){
-       log.info("contem a palavra mensagem");
-       return record;
-     }
-     return record;
-    };
   }
 }

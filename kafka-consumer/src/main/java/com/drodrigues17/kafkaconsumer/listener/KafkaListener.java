@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 public class KafkaListener {
 
 
-  @KafkaListenerCustomizado(
-      grupo = "grupo-1")
+  @KafkaListenerCustomizado(grupo = "grupo-1")
   public void listener(String mensagem) {
     log.info("mensagem '{}' recebida com sucesso", mensagem);
   }

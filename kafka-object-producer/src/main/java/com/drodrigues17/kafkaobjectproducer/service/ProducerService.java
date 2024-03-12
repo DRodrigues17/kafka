@@ -17,7 +17,7 @@ public class ProducerService {
   private final KafkaTemplate<String, Serializable> kafkaTemplate;
 
   public void enviarMensagemParaTopico(Jogo jogo){
-    kafkaTemplate.send("object-topic", jogo).whenComplete((resultado, ex) -> {
+    kafkaTemplate.send("object-topic", 0, "", jogo).whenComplete((resultado, ex) -> {
       if (ex == null) {
         log.info("jogo '{}' enviado com sucesso na partição '{}' com o offset '{}'"
             , jogo
@@ -31,7 +31,7 @@ public class ProducerService {
   }
 
   public void enviarMensagemParaTopico(Periferico periferico){
-    kafkaTemplate.send("object-topic", periferico).whenComplete((resultado, ex) -> {
+    kafkaTemplate.send("object-topic", 1, "", periferico).whenComplete((resultado, ex) -> {
       if (ex == null) {
         log.info("periférico '{}' enviado com sucesso na partição '{}' com o offset '{}'"
             , periferico
