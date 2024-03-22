@@ -10,4 +10,4 @@ estou tomando como base de meus estudos os seguintes cursos :
 - https://medium.com/creditas-tech/desvendando-o-kafka-parte-3-partitions-e-replication-23b36bb88c80
 - https://imasters.com.br/software/apache-kafka-entenda-conceitos-arquiteturas-e-componentes
 
-Siga como base a [wiki](https://github.com/DRodrigues17/kafka/wiki) para executar os projetos 
+Na [wiki](https://github.com/DRodrigues17/kafka/wiki) explico a parte teorica e prática do que fiz.
